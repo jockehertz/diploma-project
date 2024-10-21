@@ -1,0 +1,186 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{tkz-euclide}
+\usepackage{pgfplots}
+\usepackage[many]{tcolorbox}
+\pgfplotsset{compat=1.18}
+\newtcolorbox{BOX}{
+colframe=white,
+colback=white,
+enhanced,
+boxrule=1.5pt,
+borderline={0.75pt}{0pt}{dashed},
+}
+\tikzset{european}
+\title{Electronics \& Magnetism}
+\author{Hertzberg, Joakim D.}
+\date{\today}
+
+%END OF PREAMBLE
+\begin{document}
+
+\clearpage \maketitle
+\begin{center}
+	FYS01a: Physics 1a
+\end{center}
+
+\vfill
+
+\begin{center}
+This document has used \LaTeX\ in combination with \emph{TikZ} for typesetting.
+\end{center}
+
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Fundamental Quanitites}
+
+
+\subsection{Charge}
+Charge is measured in Coulomb ($C$). In equations, it's 
+often symbolised with $q_n$.
+
+
+\subsection{Potential Difference}
+\emph{Potential Difference} (alterenatively \emph{Voltage}) is the difference in the amount of energy that a charge carrier has between 2 points. 
+
+\subsection{Flow}
+Flow (alterenatively \emph{Amperage}), measured in 
+$A$ (\emph{Amperes}), but in equations denoted as $I$ is 
+the amount of charge moving through a certain 
+cross-section per unit of time. $$I = C \ s^{-1}$$
+
+\newpage
+
+\section{Circuits \& Quanitites}
+The structure of a circuit affects how the \emph{Voltage} 
+, \emph{Resistance}, \& \emph{Amperage} behaves. 
+
+\subsection{Circuits in series}
+\bigbreak
+\begin{center}
+\begin{circuitikz}[scale=3.0]
+\draw (0,0) -- (0,1) to[R=$R_1$] (1,1) to[R=$R_2$] (2,1) -- (2,0) to[battery1] (0,0);
+
+\node[anchor=south east] at(1,1){$V_1$};
+
+\node[anchor=south east] at(2,1){$V_2$};
+
+\node[anchor=north east] at(1,1){$I_1$};
+
+\node[anchor=north east] at(2,1){$I_2$};
+
+
+
+\end{circuitikz}
+\end{center}
+
+
+For a circuit connected in series it is true that: 
+$$R = \sum_{k=1}^{n} R_n$$
+
+$$I = I_1 = I_2 \cdots I_n$$
+
+$$V = \sum_{k=1}^{n} V_n$$
+
+\newpage
+
+\subsection{Circuits in parallel}
+\bigbreak
+\begin{center}
+\begin{circuitikz}[scale=3.0]
+\draw (0,0) -- (0,2) to[R=$R_1$] (2,2) -- (2,0) to[battery1] (0,0);
+\draw (0,1) to[R=$R_2$, *-*] (2,1);
+
+\node[anchor=south east] at(0.8,0){$V_0$};
+
+\node[anchor=south east] at(0.8,1){$V_2$};
+
+\node[anchor=south east] at(0.8,2){$V_1$};
+
+\node[anchor=north east] at(0.8,0){$I_0$};
+
+\node[anchor=north east] at(0.8,1){$I_2$};
+
+\node[anchor=north east] at(0.8,2){$I_1$};
+
+\end{circuitikz}
+\end{center}
+
+
+For a circuit connected in parallel it is true that:
+
+$$\frac{1}{R} = \sum_{k=1}^{n} \frac{1}{R_n}$$
+
+$$I = \sum_{k=1}^{n} I_n$$
+
+$$V=V_1=V_2 \cdots V_n$$
+
+\newpage
+
+\subsection{Resistor Equivalence}
+
+If there is a given circuit where the resistors are connected differently throughout the whole circuit, i.e. 
+There may be two resistors connected in series, connected to a another one in parallel, the rules given in 
+\textbf{2.1} and \textbf{2.2} may be used to find an equivalent resistor. \bigbreak
+
+
+\begin{center}
+\begin{circuitikz}[scale=3.0]
+\draw (0,0) -- (0,2) to[R=$R_1$] (1,2) to[R=$R_2$](2,2) -- (2,0) to[battery1] (0,0);
+\draw (0,1) to[R=$R_3$, *-*] (2,1);
+
+\node[anchor=south east] at(0.8,0){$V_0$};
+
+\node[anchor=south east] at(0.3,2){$V_1$};
+
+\node[anchor=south east] at(1.3,2){$V_2$};
+
+\node[anchor=south east] at(0.8,1){$V_3$};
+
+\node[anchor=north east] at(0.8,0){$I_0$};
+
+\node[anchor=north east] at(0.3,2){$I_1$};
+
+\node[anchor=north east] at(1.3,2){$I_2$};
+
+\node[anchor=north east] at(0.8,1){$I_3$};
+
+\end{circuitikz}
+\end{center}
+
+\newpage
+
+Here, one may find an equivalent resistor to $R_1$ and $R_2$ using $R=\sum_{k=0}^{n}R_n$. 
+Let the equivalent resistor be $R_{\epsilon}$:
+$$R_{\epsilon} = R_1 + R_2$$
+\bigbreak
+
+\begin{center}
+\begin{circuitikz}[scale=3.0]
+	\draw (0,0) -- (0,2) to[R=$R_{\epsilon}$] (2,2) -- (2,0) to[battery1] (0,0);
+\draw (0,1) to[R=$R_3$, *-*] (2,1);
+
+\node[anchor=south east] at(0.8,0){$V_0$};
+
+\node[anchor=south east] at(0.8,2){$V_{\epsilon}$};
+
+\node[anchor=south east] at(0.8,1){$V_3$};
+
+\node[anchor=north east] at(0.8,0){$I_0$};
+
+\node[anchor=north east] at(0.8,2){$I_{\epsilon}$};
+
+\node[anchor=north east] at(0.8,1){$I_3$};
+
+\end{circuitikz}
+\end{center}
+
+\end{document}
