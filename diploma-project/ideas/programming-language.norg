@@ -1,0 +1,101 @@
+* Idea for Diploma Project: Programming Language
+
+** Synopsis
+   The main idea for this diploma project is a programming language where the syntax is mostly based upon mathematics
+
+*** Examples
+
+    *Lists - Sets*
+    In my idea for a programming language, arrays (lists with unmutable size) are implemented as *sets*,
+    values are delimited by curly braces as that is how it's done in maths.
+    @code
+    set A = {1, 3, 5}
+    @end
+
+    Maybe one could even define a rule for them:
+    @code
+    set A = { x | x mod(2) = 0 }
+    @end 
+    (any numer x in A is divisible by 2)
+
+
+    *Variables*
+    @code
+    let x in ZZ: x = ...
+    @end
+    Note: Here, ZZ means a double-stroked Z => integers
+
+    Variables may be restricted to being part of a set as well:
+    @code
+    set A = {2, 4, 6}
+
+    let x in A: x = ...
+    @end
+    (x must here be equal to 2, 4, or 6)
+
+
+    *Mutable Lists*
+    
+    Mutable lists could be implemented as matrices:
+    @code
+    matrix M = [1, 2, 3, 4]
+    @end
+
+    2-dimensional matrices could easily be implemented with this syntax:
+    @code
+    matrix M = [1, 2, 3; 4, 5, 6; 7, 8, 9]
+    @end
+    or...
+    @code
+    matrix M = [1, 2, 3;
+                4, 5, 6;
+                7, 8, 9]
+    @end 
+    Semicolon means new row
+
+    Matrices could be accessed by a syntax similar to 2d-arrays:
+    @code
+     > console.out(M(1, 2))
+
+     > M(1, 2) = [2]
+    @end 
+    Maybe one could even access a range (minor matrix):
+
+    @code
+     > console.out(M([1, 2], [1, 2]))
+    
+     > M([1, 2], [1, 2]) = ⌈1  2⌉
+                           ⌊4  5⌋
+                          
+    @end
+
+
+
+    *Functions*
+
+    Functions could be written as they are in function analysis, hence giving us input and return type in a terse syntax:
+    @code
+    f: ZZ -> NN, x |->(
+      // Do stuff here 
+    )
+    @end
+    This function takes an integer input and returns a natural number (i.e. it *maps* integers to naturals), it takes only 1 input, i.e. x
+
+
+    
+    *ASCII-rendering?*
+
+    It would be fun if i could render ASCII, so if one wrote `console.out(M)` for the matrix:
+    @code
+    matrix M = [1, 2, 3;
+                4, 5, 6;
+                7, 8, 9]
+    @end
+
+    You would get following in the console:
+    @code
+        ⌈1  2  3⌉
+    M = |4  5  6|
+        ⌊7  8  9⌋
+    @end 
+
